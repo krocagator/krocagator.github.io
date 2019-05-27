@@ -58,16 +58,14 @@
 				var sqfootage = document.getElementById("user_input2").value;
 				var mixmL = sqfootage * mixAppmL;
 				document.getElementById('area1').innerHTML = mixmL.toFixed(4) + " mL";
-				document.getElementById('area2').innerHTML = (mixmL * mlToOz).toFixed(4) + " oz";
 				document.getElementById('area3').innerHTML = (mixmL * mlToOz * ozToGal).toFixed(4) + " gals";
-				document.getElementById('area4').innerHTML = (mixmL / 454).toFixed(4) + " lbs";
 	
 			}
 			function showInput3() {
 				var grossWtAqua = document.getElementById("user_input3").value;
 				var numTares3 = document.getElementById("tare_input3").value;
-				var netWtAqua = grossWtAqua - aquaJug;
-				var aquaReslinInLbs = netWtAqua * lbsToMl * mlToOz * aquaDilution * aquaAppLbs
+				var netWtAqua = grossWtAqua - (numTares3 * aquaJug) ;
+				var aquaReslinInLbs = netWtAqua * lbsToMl * mlToOz * aquaDilution * aquaAppLbs;
 				document.getElementById('aqua1').innerHTML = aquaReslinInLbs.toFixed(4) + "lbs";
 			}
 			
@@ -95,13 +93,16 @@
 		</form>
 			<input type="submit" onclick="showInput();"><br/>
 			</br>
-				<label>Net Weight Mixed Product in Lbs:</label>
+				<label>Tare Weight Mixed Product in Lbs:</label>
+				<p><i>Gross weight - weight of container(s)</i></p>
 					<p><span id='display1'></span></p>
 <!--					<label>Amount of Demand CS in floz</label>
 					<p><span id='display2'></span></p>   </!-->
 				<label>Amount of Demand CS in lbs</label>
+				<p><i>Tare Weight * 454ml/1lbs * 1oz/29.6ml * 1gal/128oz * 0.2oz Demand/gal water * 0.068 lbs Demand/oz Demand</i></p>
 					<p><span id='display3'></span></p>
 				<label>Amount of Vectobac WDG in lbs</label>
+				<p><i>Tare Weight * 454ml/1lbs * 1oz/29.6ml * 1gal/128oz * 0.16oz Vectobac / gal water * 1 lbs / 16oz</i></p>
 					<p><span id='display4'></span></p>
 			</br>
 		<form>
@@ -118,6 +119,7 @@
 		<input type="submit" onclick="showInput3();"><br/>
 				</br>
 				<label>Amount of AquaReslin in lbs:</label>
+				<p><i>Tare Weight * 454ml/1lbs * 1oz/29.6ml  * 0.0625 or 200ml AquaReslin/3000ml Water * 0.065 lbs AquaReslin/oz</i></p>
 				<p><span id='aqua1'></span></p>
 		
 		 <form>
@@ -128,10 +130,8 @@
 				<input type="submit" onclick="showInput2();"></input></br>
 				</br>
 				<label>Amount of mixed product needed:</label>
-				<p><span id='area1'></span></p>
-				<p><span id='area2'></span></p>
-				<p><span id='area3'></span></p>
-				<p><span id='area4'></span></p>
+				<p><span id='area1'></span><i> = Square footage  * 7.57ml/sqft</i></p>
+				<p><span id='area3'></span><i> = Square footage  * 7.57ml/sqft * 1oz/29.6mL * 1gal/128oz</i></p>
 				
 		 <form>
 				<label><b>Enter dimensions for ULV Application in Feet</b></label>
@@ -145,11 +145,11 @@
 				</br>
 				</br>
 				<label>Linear feet for ULV:</label>
-				<p><span id='aquaDisplay1'></span></p>
+				<p><span id='aquaDisplay1'></span><i> = Length * Number of passes (width rounded up to nearest 50, then divide by 50)</i></p>
 				<label>Square feet for ULV:</label>
-				<p><span id='aquaDisplay2'></span></p>
+				<p><span id='aquaDisplay2'></span><i> = Linear feet * 50ft (swath width)</i></p>
 				<label>Ml premix AquaReslin for treatment:</label>
-				<p><span id='aquaDisplay3'></span></p>
+				<p><span id='aquaDisplay3'></span><i> = Linear feet * 0.27ml/ft  (0.27mL/ft comes from product application label)</i></p>
 			
 			</br>	
 			<label><b>Conversion Equations</b></label>
@@ -163,5 +163,7 @@
 			<label><b>Rates for Application</b></label>
 			<p>Demand CS (DCS) = 0.2floz/gal
 			</br> Vectobac WDG (VBWDG) = 0.16floz/gal
+			</br>
+			<p><i>Kyle Mulroe 2019</i></p>
 </body>
 </html>
